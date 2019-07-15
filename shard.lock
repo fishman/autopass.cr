@@ -1,0 +1,38 @@
+version: 1.0
+shards:
+  base32:
+    github: noumar/base32
+    commit: 44474d366c456c3e0e4bb292a03e890c6a45aeec
+
+  crotp:
+    github: Xosmond/crotp
+    commit: 669c8f37e2747886d0db00390180eeba5b106fd7
+
+  dbus:
+    github: oprypin/crystal-dbus
+    commit: dd744b951dc2bc12399ac518f3a042965f64392b
+
+  gpg:
+    gitlab: repomaa/gpg.cr
+    commit: b52cb19f5c24f358f8fa62b8b330eb281b626884
+
+  notify:
+    github: woodruffw/notify.cr
+    commit: c1902634ce60acbd13cb445d441b3ca32631021e
+
+  rofi:
+    github: repomaa/rofi.cr
+    commit: 93c5339249e90d89b4d46aa33b0b053ad92e16c8
+
+  spec2:
+    github: waterlink/spec2.cr
+    version: 0.11.0
+
+  xclib:
+    gitlab: repomaa/xclib.cr
+    commit: 054263a8402ea6b22285315484f3c4c97f21f1d6
+
+  xdo:
+    gitlab: repomaa/xdo.cr
+    commit: c6e19c6392b8241f4b0be9fb8c3638a7069c85ee
+

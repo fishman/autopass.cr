@@ -1,0 +1,31 @@
+name: autopass
+version: 0.1.0
+
+authors:
+  - Joakim Reinert <mail@jreinert.com>
+
+targets:
+  autopass:
+    main: src/autopass/cli.cr
+
+dependencies:
+  xdo:
+    gitlab: repomaa/xdo.cr
+  gpg:
+    gitlab: repomaa/gpg.cr
+    branch: master
+  rofi:
+    github: repomaa/rofi.cr
+    branch: master
+  crotp:
+    github: Xosmond/crotp
+    branch: upgrades/crystal-0-28-0-algorithm
+  xclib:
+    gitlab: repomaa/xclib.cr
+  notify:
+    github: woodruffw/notify.cr
+    branch: master
+
+crystal: 0.29.0
+
+license: MIT
