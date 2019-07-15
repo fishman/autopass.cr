@@ -10,6 +10,7 @@ module Autopass
       when Tab then io << "Tab"
       when Return then io << "Return"
       when Space then io << "space"
+      when Delay then io << "delay"
       end
     end
 
