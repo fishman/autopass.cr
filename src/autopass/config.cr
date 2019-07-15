@@ -11,7 +11,7 @@ module Autopass
     @@config ||= load_config!
   end
 
-  def self.load_config!(path = File.join(ENV.fetch("XDG_CONFIG_HOME", "~/.config"), "autopass.cr", "config.yml"))
+  def self.load_config!(path = File.join(ENV.fetch("XDG_CONFIG_HOME", "~/.config"), "autopass", "config.yml"))
     path = File.expand_path(path)
 
     @@config = File.exists?(path) ? Config.load(path) : Config.new
@@ -30,7 +30,7 @@ module Autopass
     @cache_key : String?
     @[YAML::Field(converter: Autopass::Converters::Path)]
     getter cache_file : String = File.expand_path(
-      File.join(ENV.fetch("XDG_CACHE_HOME", "~/.cache"), "autopass.cr", "cache.gpg")
+      File.join(ENV.fetch("XDG_CACHE_HOME", "~/.cache"), "autopass", "cache.gpg")
     )
     getter alt_delay : Float64 | Int32 = 1
     getter delay : Float64 | Int32 = 0.5
