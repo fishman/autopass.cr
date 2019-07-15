@@ -30,7 +30,7 @@ shards:
 
   xclib:
     gitlab: repomaa/xclib.cr
-    commit: 054263a8402ea6b22285315484f3c4c97f21f1d6
+    commit: 5c0aa81af49f36876621c57466f1be6110407679
 
   xdo:
     gitlab: repomaa/xdo.cr
