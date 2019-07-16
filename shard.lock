@@ -34,5 +34,5 @@ shards:
 
   xdo:
     gitlab: repomaa/xdo.cr
-    commit: 5bae866f6551e9a93da65c4afd84dffe8391740b
+    commit: 03842223bc767b42221bd51ce9f50d10dd5b2acc
 
