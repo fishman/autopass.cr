@@ -37,6 +37,7 @@ module Autopass
 
     def autotype(entry : Entry, autotype : Array(String | Key))
       window = target_window_for(entry)
+      window.activate!
       autotype.each do |part|
         case part
         when String then window.enter_text(entry.secret[part])
@@ -149,7 +150,9 @@ module Autopass
 
       case action
       when .autotype?
-        target_window_for(entry).enter_text(value)
+        window = target_window_for(entry)
+        window.activate!
+        window.enter_text(value)
       when .copy?
         secret = entry.secret
         copy(value, secret.clipboard_selection, secret.clipboard_clear_delay)
