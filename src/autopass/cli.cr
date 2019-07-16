@@ -24,8 +24,12 @@ module Autopass
       args_hash = Digest::MD5.hexdigest(args.to_s)
       @pidfile = File.join(ENV.fetch("XDG_RUNTIME_DIR", Dir.tempdir), "autopass-#{args_hash}.pid")
       if File.exists?(@pidfile)
-        Process.kill(Signal::USR1, File.read(@pidfile).to_i)
-        exit
+        begin
+          Process.kill(Signal::USR1, File.read(@pidfile).to_i)
+          exit
+        rescue
+          File.delete(@pidfile)
+        end
       end
 
       File.write(@pidfile, Process.pid)
