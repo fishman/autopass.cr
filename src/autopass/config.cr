@@ -23,7 +23,7 @@ module Autopass
 
     @[YAML::Field(converter: Autopass::Converters::Path)]
     getter password_store : String = File.expand_path(
-      ENV.fetch("PASSWORD_STORE_DIR", "~/.password_store")
+      ENV.fetch("PASSWORD_STORE_DIR", "~/.password-store")
     )
 
     getter? use_cache : Bool = true
