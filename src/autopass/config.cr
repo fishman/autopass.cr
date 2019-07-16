@@ -35,6 +35,8 @@ module Autopass
     getter alt_delay : Float64 | Int32 = 1
     getter delay : Float64 | Int32 = 0.5
     getter close_delay : Float64 | Int32 = 10
+    getter type_delay : Float64 | Int32 = 0.2
+
     getter clipboard_selection : Xclib::Selection = Xclib::Selection::Primary
     getter clipboard_clear_delay : Float64 | Int32 = 10
 

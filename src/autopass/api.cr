@@ -35,9 +35,10 @@ module Autopass
     def initialize(@state_handler, @log = Logger.new(STDOUT))
     end
 
-    def autotype(entry : Entry, autotype : Array(String | Key))
+    def autotype(entry : Entry, autotype : Array(String | Key), delay)
       window = target_window_for(entry)
       window.activate!
+
       autotype.each do |part|
         case part
         when String then window.enter_text(entry.secret[part])
@@ -105,9 +106,12 @@ module Autopass
 
       {% begin %}
         case action
-        when .autotype? then autotype(entry, entry.secret.autotype)
+        when .autotype?
+          autotype(entry, entry.secret.autotype, entry.secret.type_delay)
         {% for i in 1..6 %}
-        when .autotype{{i}}? then autotype(entry, entry.secret.autotype_{{i}})
+        when .autotype{{i}}?
+          delay = { entry.secret.type_delay, entry.secret.alt_delay }.max
+          autotype(entry, entry.secret.autotype_{{i}}, delay)
         {% end %}
         {% for action in %i[select_tan copy_pass copy_user copy_otp open_browser open_entry] %}
         when .{{action.id}}? then {{action.id}}(entry)

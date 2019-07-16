@@ -96,6 +96,7 @@ module Autopass
         delay
         clipboard_selection
         clipboard_clear_delay
+        type_delay
         autotype
         autotype_1
         autotype_2
@@ -116,6 +117,7 @@ module Autopass
 
       @alt_delay : Float64?
       @delay : Float64?
+      @type_delay : Float64?
       @clipboard_selection : Xclib::Selection?
       @clipboard_clear_delay : Int32?
 
