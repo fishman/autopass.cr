@@ -14,7 +14,7 @@ shards:
 
   gpg:
     gitlab: repomaa/gpg.cr
-    commit: b52cb19f5c24f358f8fa62b8b330eb281b626884
+    commit: 0dff234c64e1cd0b7b6d49bad5b162dc72019db0
 
   notify:
     github: woodruffw/notify.cr
