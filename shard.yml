@@ -18,8 +18,8 @@ dependencies:
     github: repomaa/rofi.cr
     branch: master
   crotp:
-    github: Xosmond/crotp
-    branch: upgrades/crystal-0-28-0-algorithm
+    github: philnash/crotp
+    version: 0.5.0
   xclib:
     gitlab: repomaa/xclib.cr
   notify:

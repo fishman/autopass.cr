@@ -1,12 +1,12 @@
 version: 1.0
 shards:
   base32:
-    github: noumar/base32
-    commit: 44474d366c456c3e0e4bb292a03e890c6a45aeec
+    github: repomaa/base32
+    commit: 31e9ce36f06883bb87d674faac686155dfc070b0
 
   crotp:
-    github: Xosmond/crotp
-    commit: 669c8f37e2747886d0db00390180eeba5b106fd7
+    github: philnash/crotp
+    version: 0.5.0
 
   dbus:
     github: oprypin/crystal-dbus
