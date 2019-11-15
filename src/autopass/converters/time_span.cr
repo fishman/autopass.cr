@@ -1,6 +1,6 @@
 module Autopass::Converters
   module TimeSpan
-    MATCHER = /^(?<value>\d+(?:\.\d+)?)(?:\.(?<unit>second|minute|hour|day)s?)$/
+    MATCHER = /^(?<value>\d+(?:\.\d+)?)(?:\.(?<unit>second|minute|hour|day)s?)?$/
 
     def from_yaml(ctx : YAML::ParseContext, node : YAML::Nodes::Node) : Time::Span
       unless node.is_a?(YAML::Nodes::Scalar)
