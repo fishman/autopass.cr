@@ -1,22 +1,52 @@
-# autopass
+# autopass.cr
 
-TODO: Write a description here
+This is a complete rewrite of [repomaa/autopass](/repomaa/autopass) with a focus
+on maintainability, stability and safety. It's mostly backwards compatible
+although you should remove your cache (`$XDG_CACHE_DIR/autopass/cache.gpg`) and
+let autopass.cr rebuild it.
+
+autopass.cr doesn't shell out for gpg, xclip or autotyping over xdotool but
+instead uses native libraries.
 
 ## Installation
 
-TODO: Write installation instructions here
+### ArchLinux
 
-## Usage
+Be sure to import my GPG key:
 
-TODO: Write usage instructions here
+[`CC7B D43A 315E BC37 3F9A 1F2E EFEB 16CB 1C89 52C5`](https://keys.openpgp.org/vks/v1/by-fingerprint/CC7BD43A315EBC373F9A1F2EEFEB16CB1C8952C5)
 
-## Development
+Get one of the following AUR packages:
 
-TODO: Write development instructions here
+- https://aur.archlinux.org/autopass.cr-bin
+- https://aur.archlinux.org/autopass.cr
+- https://aur.archlinux.org/autopass.cr-git
+
+### Other systems
+
+Install the following make dependencies:
+
+- crystal
+- shards
+- rust
+- cargo
+- git
+- python
+
+Install the following runtime dependencies:
+
+- gpgme
+- rofi
+- xdotool
+- gc
+- libyaml
+- libevent
+
+run `make install`
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/autopass/fork>)
+1. Fork it (<https://github.com/repomaa/autopass/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -24,4 +54,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [your-github-user](https://github.com/your-github-user) Joakim Reinert - creator, maintainer
+- [repomaa](https://github.com/repomaa) Joakim Repomaa - creator, maintainer
