@@ -5,6 +5,7 @@ require "./converters/path"
 require "./converters/autotype"
 require "./gpg"
 require "./entry"
+require "./converters/time_span"
 
 module Autopass
   def self.config
@@ -34,7 +35,6 @@ module Autopass
     )
     getter alt_delay : Float64 | Int32 = 1
     getter delay : Float64 | Int32 = 0.5
-    getter close_delay : Float64 | Int32 = 10
     getter type_delay : Float64 | Int32 = 0.2
 
     getter clipboard_selection : Xclib::Selection = Xclib::Selection::Primary
@@ -42,6 +42,8 @@ module Autopass
 
     getter username_key : String = "user"
     getter password_key : String = "pass"
+    @[YAML::Field(converter: Autopass::Converters::TimeSpan)]
+    getter server_timeout : Time::Span = 15.minutes
 
     @[YAML::Field(converter: Autopass::Converters::Autotype)]
     getter autotype : Array(String | Key) = ["user", Autopass::Key::Tab, "pass"]

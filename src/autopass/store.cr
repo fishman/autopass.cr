@@ -33,7 +33,8 @@ module Autopass
 
     def refresh
       Dir[File.join(Autopass.config.password_store, "**/*.gpg")].map do |path|
-        @entries << Entry.new(path)
+        entry = Entry.new(path)
+        @entries << entry unless @entries.includes?(entry)
       end
 
       return unless Autopass.config.use_cache?
@@ -41,7 +42,11 @@ module Autopass
       marked_for_deletion = [] of Entry
 
       @entries.each_with_index do |entry, index|
-        print "> Refreshing cache#{DOTS.next} #{progress(index)}%\r"
+        printf(
+          "> Refreshing cache%<dots>s %<progress>6.2f%%\r",
+          { dots: DOTS.next, progress: progress(index) }
+        )
+
         marked_for_deletion << entry if entry.deleted?
         entry.decrypt if entry.changed? || !entry.decrypted?
       end

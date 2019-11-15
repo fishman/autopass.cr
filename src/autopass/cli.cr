@@ -10,6 +10,10 @@ require "./rofi_tan_dialog"
 require "./rofi_atom_dialog"
 require "./state_handler"
 
+{% unless flag?(:no_systemd) %}
+  require "./systemd_socket_activation"
+{% end %}
+
 module Autopass
   class CLI
 
@@ -17,23 +21,10 @@ module Autopass
       dialog
     ]
 
-    private getter api, notifier, state_handler, pidfile : String
+    private getter api, notifier, state_handler
     private delegate config, to: Autopass
 
     def initialize(args)
-      args_hash = Digest::MD5.hexdigest(args.to_s)
-      @pidfile = File.join(ENV.fetch("XDG_RUNTIME_DIR", Dir.tempdir), "autopass-#{args_hash}.pid")
-      if File.exists?(@pidfile)
-        begin
-          Process.kill(Signal::USR1, File.read(@pidfile).to_i)
-          exit
-        rescue
-          File.delete(@pidfile)
-        end
-      end
-
-      File.write(@pidfile, Process.pid)
-
       @parser = OptionParser.new do |p|
         p.on("-h", "--help", "Show this message") do
           puts p
@@ -50,14 +41,9 @@ module Autopass
       end
 
       @api = API(RofiTanDialog, RofiAtomDialog).new(state_handler, notifier)
-      @jobs_running = Channel(Nil).new(1)
-      @jobs_done = Channel(Nil).new(1)
-      @exit_status = 0
     end
 
     def run
-      @jobs_running.send(nil)
-
       {% begin %}
         case @command
         {% for command in VALID_COMMANDS %}
@@ -66,26 +52,29 @@ module Autopass
         else abort("Invalid command '#{@command}'\n#{@parser}")
         end
       {% end %}
-
-      @jobs_running.receive
-      @jobs_done.send(nil)
     rescue exception
-      STDERR.puts(exception.message)
-      @exit_status = 1
+      abort(exception.message)
     end
 
-    def wait
+    def listen(fifo : IO::Evented)
+      fifo.read_timeout = Autopass.config.server_timeout
+
       loop do
-        until @jobs_done.empty?
-          @jobs_done.receive
+        fifo.gets
+        puts "Got signal"
+        begin
+          @state_handler.restore
+        rescue error : RofiEntryDialog::EmptySelection
+          fifo.puts(error.message)
         end
-
-        sleep config.close_delay
-        break if @jobs_done.empty? && @jobs_running.empty?
       end
-
-      File.delete(pidfile)
-      @exit_status
+    rescue IO::Timeout
+      puts "Timeout"
+      exit
+    rescue error
+      STDERR.puts(error.message)
+      fifo.puts(error.message)
+      exit 1
     end
 
     def run_dialog
@@ -98,24 +87,8 @@ module Autopass
         end
       rescue exception
         notifier.error(exception.message || exception.to_s)
-        @exit_status = 1
+        raise exception
       end
-    end
-
-    def restore
-      @jobs_running.send(nil)
-      state_handler.restore
-    rescue exception
-      notifier.error(exception.message || exception.to_s)
-      @exit_status = 1
-    ensure
-      @jobs_running.receive
-      @jobs_done.send(nil)
-    end
-
-    def hard_quit
-      File.delete(pidfile)
-      exit 1
     end
 
     private def store
@@ -127,24 +100,21 @@ module Autopass
       when .entries? then run_dialog
       when .entry? then api.open_entry(state.entry)
       when .tan? then api.select_tan(state.entry)
-      when .closed? then close
       end
-    end
-
-    private def close(code = 0)
-      sleep config.close_delay
-    end
-
-    private def cancel_close
-      @close_channel.receive?
     end
   end
 end
 
 cli = Autopass::CLI.new(ARGV)
-Signal::USR1.trap { cli.restore }
-Signal::INT.trap { cli.hard_quit }
-Signal::TERM.trap { cli.hard_quit }
 
-spawn cli.run
-exit cli.wait
+{% begin %}
+  {% unless flag?(:no_systemd) %}
+    if Autopass::SystemdSocketActivation.was_socket_activated?
+      cli.listen(Autopass::SystemdSocketActivation.fifo)
+    else
+  {% end %}
+    cli.run
+  {% unless flag?(:no_systemd) %}
+    end
+  {% end %}
+{% end %}

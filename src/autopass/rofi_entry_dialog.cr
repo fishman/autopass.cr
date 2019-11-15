@@ -4,6 +4,12 @@ require "./api"
 
 module Autopass
   class RofiEntryDialog < EntryDialog
+    class EmptySelection < Exception
+      def initialize
+        super("empty selection")
+      end
+    end
+
     def show
       rofi_dialog = Rofi::Dialog.new(
         entries,
@@ -15,7 +21,7 @@ module Autopass
       )
 
       dialog_result = rofi_dialog.show
-      raise "empty selection" if dialog_result.nil?
+      raise EmptySelection.new if dialog_result.nil?
 
       action = API::Actions.from_value(dialog_result.key_code)
       entry = dialog_result.selected_entry
