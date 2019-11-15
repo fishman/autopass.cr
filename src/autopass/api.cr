@@ -140,13 +140,18 @@ module Autopass
     end
 
     private def copy(text, selection, clear_delay)
-      Xclib.store(text, selection)
-      (1..clear_delay.to_i).reverse_each do |i|
-        log.info("Clearing clipboard in #{i} seconds")
-        sleep 1
-      end
+      previous_content = Xclib.load(selection)
+      begin
+        Xclib.store(text, selection)
+        (1..clear_delay.to_i).reverse_each do |i|
+          log.info("Clearing clipboard in #{i} seconds")
+          sleep 1
+        end
 
-      sleep(clear_delay - clear_delay.to_i)
+        sleep(clear_delay - clear_delay.to_i)
+      ensure
+        Xclib.store(previous_content, selection)
+      end
     end
 
     private def perform_atom_action(entry, action, value)
