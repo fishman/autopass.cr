@@ -47,7 +47,11 @@ module Autopass
           { dots: DOTS.next, progress: progress(index) }
         )
 
-        marked_for_deletion << entry if entry.deleted?
+        if entry.deleted?
+          marked_for_deletion << entry
+          next
+        end
+
         entry.decrypt if entry.changed? || !entry.decrypted?
       end
 
