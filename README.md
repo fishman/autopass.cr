@@ -61,7 +61,7 @@ You can find examples for socket and service units in
 [autopass.service](/repomaa/autopass.cr/tree/master/autopass.service).
 
 If you installed autopass.cr from AUR, socket and service files have been set up
-for you. Start the socket by running `systemd --user start autopass.socket`.
+for you. Start the socket by running `systemctl --user start autopass.socket`.
 This will open a FIFO `$XDG_RUNTIME_DIR/autopass.fifo`. To start autopass simply
 write anything followed by newline on the FIFO: `echo start >>
 $XDG_RUNTIME_DIR/autopass.fifo`.
