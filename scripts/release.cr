@@ -105,14 +105,14 @@ class Releaser
   end
 
   private def upload_signature(path)
-    File.open(path) do |file|
-      sig_path = "#{path}.sig"
-      File.open(sig_path, "w+") do |sig_file|
-        sig_file.print(gpg.sign(file.gets_to_end, GPG::SigMode::Detach))
-      end
+    sig_path = "#{path}.sig"
 
+    begin
+      Process.run("gpg", ["--detach-sign", path])
       upload = upload_file(sig_path, "application/octet-stream")
       add_link(File.basename(sig_path), "https://gitlab.com/#{PROJECT_NAME}/#{upload.url}")
+    ensure
+      FileUtils.rm_rf(sig_path)
     end
   end
 
@@ -213,7 +213,7 @@ class Releaser
   end
 
   private def tag
-    @tag ||= `git describe --tags`.chomp
+    @tag ||= `git tag`.lines[-1].chomp
   end
 
   private def last_tag
