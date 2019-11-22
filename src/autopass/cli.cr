@@ -19,6 +19,7 @@ module Autopass
 
     VALID_COMMANDS = %w[
       dialog
+      config
     ]
 
     private getter api, notifier, state_handler
@@ -89,6 +90,10 @@ module Autopass
         notifier.error(exception.message || exception.to_s)
         raise exception
       end
+    end
+
+    def run_config
+      Autopass.config.to_yaml(STDOUT)
     end
 
     private def store

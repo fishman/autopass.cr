@@ -18,6 +18,10 @@ module Autopass::Converters
       end
     end
 
+    def to_yaml(value, builder)
+      builder.scalar(value.total_minutes)
+    end
+
     extend self
   end
 end
