@@ -1,6 +1,6 @@
 # autopass.cr
 
-This is a complete rewrite of [repomaa/autopass](/repomaa/autopass) with a focus
+This is a complete rewrite of [repomaa/autopass](https://gitlab.com/repomaa/autopass) with a focus
 on maintainability, stability and safety. It's mostly backwards compatible
 although you should remove your cache (`$XDG_CACHE_DIR/autopass/cache.gpg`) and
 let autopass.cr rebuild it.
@@ -48,7 +48,7 @@ run `make install`
 
 Start autopass.cr by running `autopass`. It will take a while to fill the
 cache if you have a lot of entries. For config options see the
-[autopass docs](/repomaa/autopass/tree/master/README).
+[autopass docs](https://gitlab.com/repomaa/autopass/tree/master/README).
 
 ### Socket activation
 
@@ -57,8 +57,8 @@ running in the background with the decrypted cache and last state (e.g. last
 open entry) in ram so starting up and restoring the state is much faster.
 
 You can find examples for socket and service units in
-[autopass.socket](/repomaa/autopass.cr/tree/master/autopass.socket) and
-[autopass.service](/repomaa/autopass.cr/tree/master/autopass.service).
+[autopass.socket](https://gitlab.com/repomaa/autopass.cr/tree/master/autopass.socket) and
+[autopass.service](https://gitlab.com/repomaa/autopass.cr/tree/master/autopass.service).
 
 If you installed autopass.cr from AUR, socket and service files have been set up
 for you. Start the socket by running `systemctl --user start autopass.socket`.
