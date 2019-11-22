@@ -13,7 +13,7 @@ dependencies:
     gitlab: repomaa/xdo.cr
   gpg:
     gitlab: repomaa/gpg.cr
-    branch: master
+    version: 0.1.2 
   rofi:
     github: repomaa/rofi.cr
     branch: master
@@ -26,6 +26,10 @@ dependencies:
   notify:
     github: woodruffw/notify.cr
     branch: master
+
+development_dependencies:
+  dotenv:
+    github: gdotdesign/cr-dotenv
 
 crystal: 0.29.0
 

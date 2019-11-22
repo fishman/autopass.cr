@@ -12,9 +12,13 @@ shards:
     github: oprypin/crystal-dbus
     commit: dd744b951dc2bc12399ac518f3a042965f64392b
 
+  dotenv:
+    github: gdotdesign/cr-dotenv
+    version: 0.3.1
+
   gpg:
     gitlab: repomaa/gpg.cr
-    commit: 0dff234c64e1cd0b7b6d49bad5b162dc72019db0
+    version: 0.1.2
 
   notify:
     github: woodruffw/notify.cr
