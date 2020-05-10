@@ -2,4 +2,4 @@
 Description=Socket activated autopass
 
 [Service]
-ExecStart=/home/jokke/autopass.cr/bin/autopass
+ExecStart=/usr/bin/autopass
