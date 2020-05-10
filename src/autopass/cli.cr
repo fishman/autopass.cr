@@ -69,7 +69,7 @@ module Autopass
           fifo.puts(error.message)
         end
       end
-    rescue IO::Timeout
+    rescue IO::TimeoutError
       puts "Timeout"
       exit
     rescue error

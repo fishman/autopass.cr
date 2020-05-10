@@ -1,5 +1,5 @@
 name: autopass
-version: 0.2.1
+version: 0.2.3
 
 authors:
   - Joakim Reinert <mail@jreinert.com>
@@ -31,6 +31,6 @@ development_dependencies:
   dotenv:
     github: gdotdesign/cr-dotenv
 
-crystal: 0.29.0
+crystal: 0.34.0
 
 license: MIT
