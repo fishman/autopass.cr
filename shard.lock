@@ -1,42 +1,42 @@
-version: 1.0
+version: 2.0
 shards:
   base32:
-    github: repomaa/base32
-    commit: 31e9ce36f06883bb87d674faac686155dfc070b0
+    git: https://github.com/repomaa/base32.git
+    version: 0.1.1+git.commit.31e9ce36f06883bb87d674faac686155dfc070b0
 
   crotp:
-    github: philnash/crotp
+    git: https://github.com/philnash/crotp.git
     version: 0.5.0
 
   dbus:
-    github: oprypin/crystal-dbus
-    commit: dd744b951dc2bc12399ac518f3a042965f64392b
+    git: https://github.com/oprypin/crystal-dbus.git
+    version: 0.1.0+git.commit.dd744b951dc2bc12399ac518f3a042965f64392b
 
   dotenv:
-    github: gdotdesign/cr-dotenv
-    version: 0.3.1
+    git: https://github.com/gdotdesign/cr-dotenv.git
+    version: 0.7.0
 
   gpg:
-    gitlab: repomaa/gpg.cr
+    git: https://gitlab.com/repomaa/gpg.cr.git
     version: 0.1.2
 
   notify:
-    github: woodruffw/notify.cr
-    commit: c1902634ce60acbd13cb445d441b3ca32631021e
+    git: https://github.com/woodruffw/notify.cr.git
+    version: 0.1.1
 
   rofi:
-    github: repomaa/rofi.cr
-    commit: 93c5339249e90d89b4d46aa33b0b053ad92e16c8
+    git: https://github.com/repomaa/rofi.cr.git
+    version: 0.1.2+git.commit.93c5339249e90d89b4d46aa33b0b053ad92e16c8
 
   spec2:
-    github: waterlink/spec2.cr
+    git: https://github.com/waterlink/spec2.cr.git
     version: 0.11.0
 
   xclib:
-    gitlab: repomaa/xclib.cr
+    git: https://gitlab.com/repomaa/xclib.cr.git
     version: 0.1.2
 
   xdo:
-    gitlab: repomaa/xdo.cr
-    commit: 03842223bc767b42221bd51ce9f50d10dd5b2acc
+    git: https://gitlab.com/repomaa/xdo.cr.git
+    version: 0.1.0+git.commit.03842223bc767b42221bd51ce9f50d10dd5b2acc
 
